@@ -36,4 +36,13 @@ gulp.task('watch', ['inject'], function () {
   gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function(event) {
     browserSync.reload(event.path);
   });
+
+  gulp.watch([
+    path.join(conf.paths.node, '/controllers/**/*.js'),
+    path.join(conf.paths.node, '/routes/**/*.js'),
+    path.join(conf.paths.node, '/services/**/*.js'),
+    path.join(conf.paths.node, '/config/**/*.js'),
+    path.join(conf.paths.node, '/app.js')], function (event) {
+    browserSync.reload(event.path);
+  });
 });

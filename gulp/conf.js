@@ -7,16 +7,18 @@
  */
 
 var gutil = require('gulp-util');
+var proxyMiddleware = require('http-proxy-middleware');
 
 /**
  *  The main paths of your project handle these with care
  */
 exports.paths = {
-  src: 'src',
+  src: 'client',
   dist: 'release',
   devDist: 'dev-release',
   tmp: '.tmp',
-  e2e: 'e2e'
+  e2e: 'e2e',
+  node: 'app'
 };
 
 /**
@@ -28,6 +30,11 @@ exports.wiredep = {
   exclude: [/\/bootstrap\.js$/, /\/bootstrap-sass\/.*\.js/, /\/require\.js/],
   directory: 'bower_components'
 };
+
+var nodeServer = 'http://localhost:3000/';
+exports.serveMiddleware = [
+  proxyMiddleware("/teste", {target: nodeServer, changeOrigin: true}),
+]
 
 /**
  *  Common implementation for an error handler of a Gulp plugin
